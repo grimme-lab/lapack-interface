@@ -13,12 +13,22 @@
 ! See the License for the specific language governing permissions and
 ! limitations under the License.
 
-module lapack
-  use lapack_gst, only : lapack_sygst
-  use lapack_trf, only : lapack_sytrf, lapack_potrf, lapack_getrf
-  use lapack_tri, only : lapack_sytri, lapack_getri
-  use lapack_trs, only : lapack_sytrs, lapack_getrs
-  implicit none
-  public
-end module lapack
+module lapack_utils
+   implicit none
+   private
 
+   public :: lapack_env
+
+   interface lapack_env
+      pure integer function ilaenv(ispec, name, opts, n1, n2, n3, n4)
+         integer, intent(in) :: ispec
+         character(len=1), intent(in) :: name
+         character(len=1), intent(in) :: opts
+         integer, intent(in) :: n1
+         integer, intent(in) :: n2
+         integer, intent(in) :: n3
+         integer, intent(in) :: n4
+      end function ilaenv
+   end interface lapack_env
+
+end module lapack_utils

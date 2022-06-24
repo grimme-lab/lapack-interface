@@ -14,5 +14,10 @@
 # limitations under the License.
 
 srcs += files(
+  'gst.f90',
   'kinds.F90',
+  'trf.f90',
+  'tri.f90',
+  'trs.f90',
+  'utils.f90',
 )
