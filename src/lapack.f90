@@ -14,6 +14,17 @@
 ! limitations under the License.
 
 module lapack
+  use lapack_ev, only : lapack_syev, lapack_spev, lapack_heev, lapack_hpev
+  use lapack_evd, only : lapack_syevd, lapack_spevd, lapack_heevd, lapack_hpevd
+  use lapack_evr, only : lapack_syevr, lapack_heevr
+  use lapack_evx, only : lapack_syevx, lapack_spevx, lapack_heevx, lapack_hpevx
+  use lapack_gst, only : lapack_sygst
+  use lapack_gv, only : lapack_sygv, lapack_spgv, lapack_hegv, lapack_hpgv
+  use lapack_gvd, only : lapack_sygvd, lapack_spgvd, lapack_hegvd, lapack_hpgvd
+  use lapack_gvx, only : lapack_sygvx, lapack_spgvx, lapack_hegvx, lapack_hpgvx
+  use lapack_trf, only : lapack_sytrf, lapack_potrf, lapack_getrf
+  use lapack_tri, only : lapack_sytri, lapack_getri
+  use lapack_trs, only : lapack_sytrs, lapack_getrs
   implicit none
   public
 end module lapack

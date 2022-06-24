@@ -45,7 +45,7 @@ endif()
 set(srcs)
 add_subdirectory("src")
 
-# multicharge library target
+# LAPACK interface library target
 add_library(
   "${PROJECT_NAME}-lib"
   "${srcs}"
