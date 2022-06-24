@@ -1,0 +1,7 @@
+name = "lapack-interface"
+version = "0.1.0"
+license = "Apache-2.0"
+author = ["Sebastian Ehlert"]
+maintainer = ["@awvwgk"]
+copyright = "Copyright 2022 Sebastian Ehlert"
+build.link = ["lapack", "blas"]
