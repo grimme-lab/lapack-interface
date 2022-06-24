@@ -14,21 +14,24 @@
 ! limitations under the License.
 
 module lapack_utils
-   implicit none
-   private
+  use lapack_kinds, only : ik
+  implicit none
+  private
 
-   public :: lapack_env
+  public :: lapack_env
 
-   interface lapack_env
-      pure integer function ilaenv(ispec, name, opts, n1, n2, n3, n4)
-         integer, intent(in) :: ispec
-         character(len=1), intent(in) :: name
-         character(len=1), intent(in) :: opts
-         integer, intent(in) :: n1
-         integer, intent(in) :: n2
-         integer, intent(in) :: n3
-         integer, intent(in) :: n4
-      end function ilaenv
-   end interface lapack_env
+  interface lapack_env
+    pure function ilaenv(ispec, name, opts, n1, n2, n3, n4) result(nb)
+      import :: ik
+      integer(ik), intent(in) :: ispec
+      character(len=1), intent(in) :: name
+      character(len=1), intent(in) :: opts
+      integer(ik), intent(in) :: n1
+      integer(ik), intent(in) :: n2
+      integer(ik), intent(in) :: n3
+      integer(ik), intent(in) :: n4
+      integer(ik) :: nb
+    end function ilaenv
+  end interface lapack_env
 
 end module lapack_utils

@@ -17,7 +17,14 @@ set(dir "${CMAKE_CURRENT_SOURCE_DIR}")
 
 list(
   APPEND srcs
+  "${dir}/ev.f90"
+  "${dir}/evd.f90"
+  "${dir}/evr.f90"
+  "${dir}/evx.f90"
   "${dir}/gst.f90"
+  "${dir}/gv.f90"
+  "${dir}/gvd.f90"
+  "${dir}/gvx.f90"
   "${dir}/kinds.F90"
   "${dir}/trf.f90"
   "${dir}/tri.f90"

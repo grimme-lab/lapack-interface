@@ -19,7 +19,7 @@ module lapack_gst
   implicit none
   private
 
-  public :: lapack_sygst
+  public :: lapack_sygst, lapack_spgst, lapack_hegst, lapack_hpgst
 
 
   !> Reduces a real symmetric-definite generalized eigenproblem to standard form.
@@ -54,9 +54,107 @@ module lapack_gst
       integer(ik), intent(in) :: lda
       integer(ik), intent(in) :: ldb
     end subroutine dsygst
+
     module procedure :: lapack_ssygst
     module procedure :: lapack_dsygst
   end interface lapack_sygst
+
+  !> reduces a complex Hermitian-definite generalized
+  !> eigenproblem to standard form.
+  !>
+  !> If ITYPE = 1, the problem is A*x = lambda*B*x,
+  !> and A is overwritten by inv(U**H)*A*inv(U) or inv(L)*A*inv(L**H)
+  !>
+  !> If ITYPE = 2 or 3, the problem is A*B*x = lambda*x or
+  !> B*A*x = lambda*x, and A is overwritten by U*A*U**H or L**H*A*L.
+  !>
+  !> B must have been previously factorized as U**H*U or L*L**H by CPOTRF.
+  interface lapack_hegst
+    pure subroutine chegst(itype, uplo, n, a, lda, b, ldb, info)
+      import :: sp
+      complex(sp), intent(inout) :: a(lda, *)
+      complex(sp), intent(in) :: b(ldb, *)
+      integer, intent(in) :: itype
+      character(len=1), intent(in) :: uplo
+      integer, intent(out) :: info
+      integer, intent(in) :: n
+      integer, intent(in) :: lda
+      integer, intent(in) :: ldb
+    end subroutine chegst
+    pure subroutine zhegst(itype, uplo, n, a, lda, b, ldb, info)
+      import :: dp
+      complex(dp), intent(inout) :: a(lda, *)
+      complex(dp), intent(in) :: b(ldb, *)
+      integer, intent(in) :: itype
+      character(len=1), intent(in) :: uplo
+      integer, intent(out) :: info
+      integer, intent(in) :: n
+      integer, intent(in) :: lda
+      integer, intent(in) :: ldb
+    end subroutine zhegst
+  end interface lapack_hegst
+
+  !> reduces a real symmetric-definite generalized eigenproblem
+  !> to standard form, using packed storage.
+  !>
+  !> If ITYPE = 1, the problem is A*x = lambda*B*x,
+  !> and A is overwritten by inv(U**T)*A*inv(U) or inv(L)*A*inv(L**T)
+  !>
+  !> If ITYPE = 2 or 3, the problem is A*B*x = lambda*x or
+  !> B*A*x = lambda*x, and A is overwritten by U*A*U**T or L**T*A*L.
+  !>
+  !> B must have been previously factorized as U**T*U or L*L**T by DPPTRF.
+  interface lapack_spgst
+    pure subroutine sspgst(itype, uplo, n, ap, bp, info)
+      import :: sp
+      real(sp), intent(inout) :: ap(*)
+      real(sp), intent(in) :: bp(*)
+      integer, intent(in) :: itype
+      character(len=1), intent(in) :: uplo
+      integer, intent(out) :: info
+      integer, intent(in) :: n
+    end subroutine sspgst
+    pure subroutine dspgst(itype, uplo, n, ap, bp, info)
+      import :: dp
+      real(dp), intent(inout) :: ap(*)
+      real(dp), intent(in) :: bp(*)
+      integer, intent(in) :: itype
+      character(len=1), intent(in) :: uplo
+      integer, intent(out) :: info
+      integer, intent(in) :: n
+    end subroutine dspgst
+  end interface lapack_spgst
+
+  !> reduces a complex Hermitian-definite generalized
+  !> eigenproblem to standard form, using packed storage.
+  !>
+  !> If ITYPE = 1, the problem is A*x = lambda*B*x,
+  !> and A is overwritten by inv(U**H)*A*inv(U) or inv(L)*A*inv(L**H)
+  !>
+  !> If ITYPE = 2 or 3, the problem is A*B*x = lambda*x or
+  !> B*A*x = lambda*x, and A is overwritten by U*A*U**H or L**H*A*L.
+  !>
+  !> B must have been previously factorized as U**H*U or L*L**H by CPPTRF.
+  interface lapack_hpgst
+    pure subroutine chpgst(itype, uplo, n, ap, bp, info)
+      import :: sp
+      complex(sp), intent(inout) :: ap(*)
+      complex(sp), intent(in) :: bp(*)
+      integer, intent(in) :: itype
+      character(len=1), intent(in) :: uplo
+      integer, intent(out) :: info
+      integer, intent(in) :: n
+    end subroutine chpgst
+    pure subroutine zhpgst(itype, uplo, n, ap, bp, info)
+      import :: dp
+      complex(dp), intent(inout) :: ap(*)
+      complex(dp), intent(in) :: bp(*)
+      integer, intent(in) :: itype
+      character(len=1), intent(in) :: uplo
+      integer, intent(out) :: info
+      integer, intent(in) :: n
+    end subroutine zhpgst
+  end interface lapack_hpgst
 
 contains
 
